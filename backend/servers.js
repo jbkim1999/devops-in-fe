@@ -3,6 +3,7 @@ class Server {
         this.id = id;
         this.capacity = 5;
         this.queue = [];
+        this.notifier = null;
         this.processed = null;
     }
 
@@ -13,6 +14,11 @@ class Server {
 
     addToQueue() {
         this.queue.push(1);
+        this.notifier.notify(this.id, this.queue.length);
+    }
+
+    setNotifier(notifier) {
+        this.notifier = notifier;
     }
 
     process() {
@@ -21,6 +27,8 @@ class Server {
             setTimeout(() => {
                 // console.log("handling a request...");
                 this.processed === null;
+                this.notifier.notify(this.id, this.queue.length);
+                
                 this.process();
             }, 5000); // 5 seconds to handle the request
         } else {

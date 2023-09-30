@@ -8,7 +8,7 @@ class Server {
 
     // method
     getUtilization() {
-        return this.queue.length();
+        return this.queue.length / this.capacity;
     }
 
     addToQueue() {
@@ -16,21 +16,23 @@ class Server {
     }
 
     process() {
-        if (this.queue.length() > 0) {
+        if (this.queue.length > 0) {
             this.processed = this.queue.shift();
             setTimeout(() => {
+                // console.log("handling a request...");
                 this.processed === null;
                 this.process();
-            }, 3000); // 3 seconds to handle the request
+            }, 5000); // 5 seconds to handle the request
         } else {
             setTimeout(() => {
+                // console.log("waiting for incoming request...");
                 this.process();
             }, 1000); // 1 second to wait for incoming request
         }
     }
 }
 
-function initializeAndGetServers(no) {
+export function initializeAndGetServers(no) {
     const servers = [];
     for (let i = 0; i < no; i++) {
         const server = new Server(i);

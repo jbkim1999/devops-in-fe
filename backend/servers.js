@@ -30,7 +30,7 @@ class Server {
                 this.notifier.notify(this.id, this.getUtilization());
                 
                 this.process();
-            }, 5000); // 5 seconds to handle the request
+            }, 3000); // 3 seconds to handle the request
         } else {
             setTimeout(() => {
                 // console.log("waiting for incoming request...");

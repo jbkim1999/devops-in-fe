@@ -7,4 +7,4 @@ In this interactive website, you will be able to visualize how certain Devops pr
 
 
 ## Lesson 1: Load Balancer
-<img width="1509" alt="Screenshot 2023-10-01 at 10 29 54 PM" src="https://github.com/jbkim1999/devops-in-fe/assets/60286063/0c56e855-7a18-4ab4-b3fa-d07ab3b4e1fd">
+<img width="1510" alt="image" src="https://github.com/jbkim1999/devops-in-fe/assets/60286063/63cdcb7d-1f68-47a0-b25c-97dad8c2147e">

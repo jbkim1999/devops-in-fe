@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from '../styles/load-balancer.module.css';
 
 import { socket } from '../components/socket';
 import BoxContainer from '../components/box-container';
@@ -40,23 +41,32 @@ export default function LoadBalancer() {
     }
 
     return (
-        <div>
-            <BoxContainer title="Client">
-                <ButtonBox text="Generate a new request" onClick={submitRequest}/>
-            </BoxContainer>
+        <div className={styles.container}>
+            <h1> Load Balancer </h1>
+            <h2> 
+                A load balancer is a network device or software application that distributes incoming network traffic or workload across multiple servers or resources to ensure efficient utilization.
+            </h2>
+            <div className={styles.divider}/> 
+            <div className={styles.boxesContainer}>
+                <BoxContainer title="Client">
+                    <ButtonBox text="Generate a new request" onClick={submitRequest}/>
+                </BoxContainer>
 
-            <BoxContainer title="Load Balancer">
-                <MessageBox text={message} status={1}/>
-            </BoxContainer>
+                <BoxContainer title="Load Balancer">
+                    <MessageBox text={message} status={1}/>
+                </BoxContainer>
 
-            {/* TODO: Dynamically generate servers */}
-            <BoxContainer title="Server 1">
-                <FillBox color="tomato" utilization={serverInfos[0]}/>
-            </BoxContainer>
+                <div className={styles.serversContainer}>
+                    {/* TODO: Dynamically generate servers */}
+                    <BoxContainer title="Server 1">
+                        <FillBox color="tomato" utilization={serverInfos[0]}/>
+                    </BoxContainer>
 
-            <BoxContainer title="Server 2">
-                <FillBox color="darkturquoise" utilization={serverInfos[1]}/>
-            </BoxContainer>
+                    <BoxContainer title="Server 2">
+                        <FillBox color="darkturquoise" utilization={serverInfos[1]}/>
+                    </BoxContainer>
+                </div>
+            </div>
         </div>
     );
 }

@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.divider {
+    border-bottom: 4px dotted black;
+    margin-bottom: 32px;
+}
+
+.boxesContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.serversContainer {
+    display: flex;
+    flex-direction: column;
+}

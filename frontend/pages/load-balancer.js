@@ -8,6 +8,7 @@ import MessageBox from '../components/boxes/message-box';
 import FillBox from '../components/boxes/fill-box';
 
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8080';
+console.log(process.env.BACKEND_URL);
 
 export default function LoadBalancer() {
     const [serverInfos, setServerInfos] = useState([0, 0]);

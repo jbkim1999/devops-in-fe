@@ -14,7 +14,7 @@ class Server {
 
     addToQueue() {
         this.queue.push(1);
-        this.notifier.notify(this.id, this.queue.length);
+        this.notifier.notify(this.id, this.getUtilization());
     }
 
     setNotifier(notifier) {
@@ -23,11 +23,11 @@ class Server {
 
     process() {
         if (this.queue.length > 0) {
-            this.processed = this.queue.shift();
             setTimeout(() => {
                 // console.log("handling a request...");
+                this.processed = this.queue.shift();
                 this.processed === null;
-                this.notifier.notify(this.id, this.queue.length);
+                this.notifier.notify(this.id, this.getUtilization());
                 
                 this.process();
             }, 5000); // 5 seconds to handle the request
@@ -35,7 +35,7 @@ class Server {
             setTimeout(() => {
                 // console.log("waiting for incoming request...");
                 this.process();
-            }, 1000); // 1 second to wait for incoming request
+            }, 500);
         }
     }
 }

@@ -4,6 +4,7 @@ import { socket } from '../components/socket';
 import BoxContainer from '../components/box-container';
 import ButtonBox from '../components/boxes/button-box';
 import MessageBox from '../components/boxes/message-box';
+import FillBox from '../components/boxes/fill-box';
 
 const BACKEND_URL = 'http://localhost:8080'; // TODO: Use ENV variable
 
@@ -15,13 +16,15 @@ export default function LoadBalancer() {
 
     useEffect(() => {
         socket.on("notify-server-change", (serverInfo) => {
-            console.log(serverInfo);
+            const updatedServerInfos = [...serverInfos];
+            updatedServerInfos[serverInfo.id] = serverInfo.utilization;
+            setServerInfos(updatedServerInfos);
         });
         
         return () => {
             socket.off("notify-server-change");
         };
-    }, []);
+    }, [serverInfos]); // IMPORTANT: serverInfos as dependency
 
     const submitRequest = async () => {
         try {
@@ -32,7 +35,6 @@ export default function LoadBalancer() {
             }
             setMessage(data.message); // TODO: SRP
         } catch (error) {
-            console.log(error.message);
             setMessage(error.message);
         }
     }
@@ -40,11 +42,20 @@ export default function LoadBalancer() {
     return (
         <div>
             <BoxContainer title="Client">
-                <ButtonBox text="Generate a new request!" onClick={submitRequest}/>
+                <ButtonBox text="Generate a new request" onClick={submitRequest}/>
             </BoxContainer>
 
             <BoxContainer title="Load Balancer">
                 <MessageBox text={message} status={1}/>
+            </BoxContainer>
+
+            {/* TODO: Dynamically generate servers */}
+            <BoxContainer title="Server 1">
+                <FillBox color="tomato" utilization={serverInfos[0]}/>
+            </BoxContainer>
+
+            <BoxContainer title="Server 2">
+                <FillBox color="darkturquoise" utilization={serverInfos[1]}/>
             </BoxContainer>
         </div>
     );

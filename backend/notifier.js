@@ -8,11 +8,11 @@ export class Notifier {
 
     // method
     setSocket(socket) {
-        console.log("setting socket to notifier");
+        // console.log("setting socket to notifier");
         this.socket = socket;
     }
 
-    notify(id, queueLength) {
-        this.socket.emit("notify-server-change", { id, queueLength });
+    notify(id, utilization) {
+        this.socket.emit("notify-server-change", { id, utilization });
     }
 }

@@ -18,7 +18,7 @@ export class LoadBalancer {
         }
 
         if (to_send === null) {
-            res.status(500).json({ message: "All the servers are unavailable at the moment :(" })
+            res.status(500).json({ message: "All the servers are busy :(" })
         } else {
             to_send.addToQueue();
             res.status(200).json({ message: `Server ${to_send.id} has received your request!` });
